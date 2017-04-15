@@ -1,5 +1,6 @@
 ﻿using MathNet.Numerics.LinearAlgebra.Complex;
 using MathNet.Numerics.Random;
+using QuantumToolkit;
 using QuantumToolkit.Type;
 using System;
 using System.Collections.Concurrent;
@@ -15,8 +16,8 @@ namespace UnitTest
     {
         static public void TestMethod()
         {
-            //初始化部分，zeroOneMeasure是个MeasureMatrixH类型，里面有两个元素{1 0;0 0}, {0 0;0 1}
-            //plusminusMeasure是个MeasureMatrixH类型，里面有两个元素{1/2 1/2;1/2 1/2}, {1/2 -1/2;-1/2 1/2}
+            //Initilization，zeroOneMeasureis a MeasureMatrixH class. {1 0;0 0}, {0 0;0 1}
+            //plusminusMeasure is MeasureMatrixH class，{1/2 1/2;1/2 1/2}, {1/2 -1/2;-1/2 1/2}
             var matrixArray0 = new Matrix[2];
             Complex[,] array0 =
             {
@@ -57,19 +58,19 @@ namespace UnitTest
                 arrayLength = 10;
             }
             var RandomGen = new CryptoRandomSource();
-            //生成一个rawKeyArray[10],是bool数组类型,每一个item,从0,1这两个中选择
+           
             //Produce raw key array 0,1
             var rawKeyArray = new byte[arrayLength];
 
-            //生成一个basisRawArray[10]，是bool数组类型,每一个item,从0,1这两个中选择
-            //0表示0,1基，1表示{+,-}基
+
+            //0 is {|0>,|1>}，1 is {|+>,|->} basis.
             var basisRawArray = new byte[arrayLength];
 
-            //生成一个ketEncArray[10]是ket数组类型.每一位由rawKeyArray和basisRawArray共同决定。
-            //if basisRawArray里面的值是0，rawKeyArray里面的值是0，则 ketEncArray里面的值是ket(0)
-            //if basisRawArray里面的值是0，rawKeyArray里面的值是1，则 ketEncArray里面的值是ket(1)
-            // if basisRawArray里面的值是1，rawKeyArray里面的值是0，则 ketEncArray里面的值是ket(1/Sqrt(2),1/Sqrt(2))
-            // if basisRawArray里面的值是1，rawKeyArray里面的值是1，则 ketEncArray里面的值是ket(1/Sqrt(2),-1/Sqrt(2))
+            //Every KetEncArray is decided by rawKeyArray and basisRawArray
+            //if basisRawArray is 0，rawKeyArray is 0，then ketEncArray is ket(0)
+            //if basisRawArray is 0，rawKeyArray is 1，then ketEncArray is ket(1)
+            // if basisRawArray is 1，rawKeyArray is 0，then ketEncArray is ket(1/Sqrt(2),1/Sqrt(2))
+            // if basisRawArray is 1，rawKeyArray is 1，then ketEncArray ket(1/Sqrt(2),-1/Sqrt(2))
             var ketEncArray = new Ket[arrayLength];
             var complexArray = new Complex[2];
             for (var i = 0; i < arrayLength; i++)
@@ -106,10 +107,10 @@ namespace UnitTest
 
             ////--------------Quantum Channel begins, ignoring EVE ----------
 
-            var densityopEncArray = new PureDensityOperator[arrayLength];
+            var densityopEncArray = new DensityOperator[arrayLength];
             for (var i = 0; i < arrayLength; i++)
             {
-                densityopEncArray[i] = new PureDensityOperator(ketEncArray[i], new Bra(ketEncArray[i]));
+                densityopEncArray[i] = new DensityOperator(ketEncArray[i], new Bra(ketEncArray[i]));
             }
             QuantumChannelProcess(densityopEncArray);
 
@@ -117,14 +118,14 @@ namespace UnitTest
             //---------------Quantum Channel End-------Eve end---------------------
 
             //---------------------Bob begin--------------------
-            //Bob 生成一个measureRawArray，是bool数组类型随机{0,1}------------
+            //Bob produces measureRawArray，randomly {0,1}------------
             var measureRawArray = new byte[arrayLength];
 
 
-            //生成结果数组 resultMeasureArray,是bool数组类型，其中的值由  measureRawArray和 densityopEncArray共同决定
-            // foreach item in densityopEncArray
-            //if measureRawArray[index]=0则用 zeroOneMeasure 作为调用的参数传递到    densityopEncArray的本位,ket[index].MeasuHResultIndex(zeroOneMeasure )
-            //if measureRawArray[index]=1则用 plusminusMeasure 作为调用的参数传递到 densityopEncArray的本位,ket[index].MeasuHResultIndex(plusminusMeasure )
+            // resultMeasureArray is bool array. The value is decided by measureRawArray and ketEncArray.
+            // foreach item in ketEncArray
+            //if measureRawArray[index]=0 then zeroOneMeasure would be transferred to ketEncArray ,ket[index].MeasuHResultIndex(zeroOneMeasure )
+            //if measureRawArray[index]=1 then plusminusMeasure would be transferred to ketEncArray,ket[index].MeasuHResultIndex(plusminusMeasure )
             var resultMeasureArray = new byte[arrayLength];
             for (var i = 0; i < arrayLength; i++)
             {
@@ -149,15 +150,10 @@ namespace UnitTest
             // ---------------------Bob end--------------------
 
 
-            //--------------公共信道广播不做--------
-
-
-            //--------------公共信道结束----------
-
 
 
             // --------------ALice begin---------------
-            //生成应答数组,correctBroadArray,bool数组类型。
+            //Produce answer array,correctBroadArray,bool array class.
             //foreach item in measureRawArray
             //if measureRawArray[index]== basisRawArray[index], correctBroadArray[index]==1. else correctBroadArray[index]==0
             var correctBroadArray = new byte[arrayLength];
@@ -170,9 +166,8 @@ namespace UnitTest
             }
 
 
-            // 生成finalAliceKey数组是bool数组类型，
             // foreach item in  correctBroadArray
-            // if correctBroadArray[index]==1 , push(rawKeyArray[index]),即把  correctBroadArray[index]==1的那些位置的  rawKeyArray[index]取出来放一起finalAliceKey。
+            // if correctBroadArray[index]==1 , push(rawKeyArray[index]),i.e.  correctBroadArray[index]==1 position  rawKeyArray[index]is taken out and storage into finalAliceKey.            
             var finalAliceKeyList = new List<byte>();
             for (var i = 0; i < arrayLength; i++)
             {
@@ -186,13 +181,12 @@ namespace UnitTest
             //------------Alice end--------------------
 
 
-            //------------公共信道开始-----------------------
-            //-----------公共信道结束------------------------
 
-            //--------------Bob开始-------------------------
-            //生成finalBobKey数组是bool数组类型
+
+            //--------------Bob begins-------------------------
+            //Produce finalBobKey array is bool array
             // foreach item in  correctBroadArray
-            // if correctBroadArray[index]==1 , push(resultMeasureArray[index]),即把  correctBroadArray[index]==1的那些位置的  resultMeasureArray[index]取出来放一起存到finalBobKey。
+            // if correctBroadArray[index]==1 , push(resultMeasureArray[index]),i.e.  correctBroadArray[index]==1 position,  resultMeasureArray[index] is taken out and storage into finalBobKey.
             var finalBobKeyList = new List<byte>();
             for (var i = 0; i < arrayLength; i++)
             {
@@ -203,13 +197,13 @@ namespace UnitTest
             }
             var finalBobKey = finalBobKeyList.ToArray();
 
-            //----------------Bob结束----------------------
+            //----------------Bob END----------------------
 
 
 
 
-            //Check 开始
-            //核对  finalAliceKey和finalBobKey是不是一样的
+            //Check Begin
+            //check finalAliceKey is equal to finalBobKey
             bool check = true;
             if (finalAliceKey.Length != finalBobKey.Length)
             {
@@ -222,67 +216,72 @@ namespace UnitTest
                     check = false;
                 }
             }
-            if (check)
-            {
-                Console.WriteLine("Success");
-            }
-            else
-            {
-                Console.WriteLine("Failed");
-            }
-            //check结束
+            //if (check)
+            //{
+            //    Console.WriteLine("Success");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Failed");
+            //}
+            ////check end
 
-            Console.WriteLine($"zeroOneMeasure:\n{zeroOneMeasure.Value[0]}{zeroOneMeasure.Value[1]}");
-            Console.WriteLine($"plusminusMeasure:\n{plusminusMeasure.Value[0]}{plusminusMeasure.Value[1]}");
+            Console.WriteLine($"zeroOneMeasure:\n{zeroOneMeasure.Value[0].ToComplexString()}\n{zeroOneMeasure.Value[1].ToComplexString()}");
+            Console.WriteLine($"plusMinusMeasure:\n{plusminusMeasure.Value[0].ToComplexString()}\n{plusminusMeasure.Value[1].ToComplexString()}");
             Console.Write("rawKeyArray\t");
             foreach (var b in rawKeyArray)
             {
-                Console.Write($"{b}");
+                Console.Write(b);
             }
             Console.WriteLine();
             Console.Write("basisRawArray\t");
             foreach (var b in basisRawArray)
             {
-                Console.Write($"{b}");
+                Console.Write(b);
             }
             Console.WriteLine();
 
-            /*for (var i = 0; i < densityopEncArray.Length; i++)
-            {
-                Console.Write($"densityopEncArray{i}");
-                Console.Write($"{densityopEncArray[i].Value}");
-            } */
+          
             Console.WriteLine();
 
             Console.Write("measureRawArray\t\t");
             foreach (var b in measureRawArray)
             {
-                Console.Write($"{b}");
+                Console.Write(b);
             }
             Console.WriteLine();
             Console.Write("resultMeasureArray\t");
             foreach (var b in resultMeasureArray)
             {
-                Console.Write($"{b}");
+                Console.Write(b);
             }
             Console.WriteLine();
             Console.Write("correctBroadArray\t");
             foreach (var b in correctBroadArray)
             {
-                Console.Write($"{b}");
+                Console.Write(b);
             }
             Console.WriteLine();
             Console.Write("finalAliceKey\t\t");
             foreach (var b in finalAliceKey)
             {
-                Console.Write($"{b}");
+                Console.Write(b);
             }
             Console.WriteLine();
             Console.Write("finalBobKey\t\t");
             foreach (var b in finalBobKey)
             {
-                Console.Write($"{b}");
+                Console.Write(b);
             }
+            if (check)
+            {
+                Console.WriteLine("\nThe protocol: Success");
+            }
+            else
+            {
+                Console.WriteLine("\nThe protocol: Failed");
+            }
+            //check end
             Console.WriteLine();
         }
 
@@ -314,7 +313,7 @@ namespace UnitTest
             alice.Release();
         }
 
-        static void QuantumChannelProcess(PureDensityOperator[] densityopEncArray)
+        static void QuantumChannelProcess(DensityOperator[] densityopEncArray)
         {
 
             // E0,E1 for Kraus Opearator,Bit Flip channel
@@ -510,7 +509,7 @@ namespace UnitTest
                                         Console.Write($"FinalAliceKey for {pair.Key}\t");
                                         foreach (var b in finalAliceKey)
                                         {
-                                            Console.Write($"{b}");
+                                            Console.Write(b);
                                         }
                                         Console.WriteLine();
                                     }

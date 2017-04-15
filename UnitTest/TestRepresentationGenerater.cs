@@ -26,9 +26,9 @@ namespace UnitTest
             var ret1 = ClassicalAlgorithm.RepresentationGenerater(matrixArray1);
 
             Console.WriteLine("ret0");
-            Console.WriteLine(ret0);
+            Console.WriteLine(ret0.ToComplexString());
             Console.WriteLine("ret1");
-            Console.WriteLine(ret1);
+            Console.WriteLine(ret1.ToComplexString());
         }
     }
 }

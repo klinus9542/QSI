@@ -121,10 +121,10 @@ namespace UnitTest
 
             ////--------------Quantum Channel begins, ignoring EVE ----------
 
-            var densityopEncArray = new PureDensityOperator[arrayLength];
+            var densityopEncArray = new DensityOperator[arrayLength];
             for (var i = 0; i < arrayLength; i++)
             {
-                densityopEncArray[i] = new PureDensityOperator(ketEncArray[i], new Bra(ketEncArray[i]));
+                densityopEncArray[i] = new DensityOperator(ketEncArray[i], new Bra(ketEncArray[i]));
             }
             QuantumChannelProcess(densityopEncArray);
 
@@ -311,7 +311,7 @@ namespace UnitTest
         }
 
 
-        static void QuantumChannelProcess(PureDensityOperator[] densityopEncArray)
+        static void QuantumChannelProcess(DensityOperator[] densityopEncArray)
         {
            foreach (var densityopMember in densityopEncArray)
             {

@@ -1,4 +1,5 @@
 ﻿using MathNet.Numerics.LinearAlgebra.Complex;
+using QuantumToolkit;
 using QuantumToolkit.Type;
 using System;
 using System.Numerics;
@@ -20,9 +21,9 @@ namespace UnitTest
             var superOperator = new SuperOperator(matrixArray);
             Complex[,] array2 = { {0.5,0.5},
                                   {0.5,0.5} };
-            var pureDensityOperator = new PureDensityOperator((Matrix)Matrix.Build.DenseOfArray(array2));
+            var pureDensityOperator = new DensityOperator((Matrix)Matrix.Build.DenseOfArray(array2));
             SuperMatrixTrans(pureDensityOperator, superOperator);
-            Console.WriteLine($"pureDensityOperator = {pureDensityOperator.Value}");
+            Console.WriteLine($"pureDensityOperator = {pureDensityOperator.Value.ToComplexString()}");
         }
     }
 }

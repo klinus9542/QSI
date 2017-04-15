@@ -21,7 +21,7 @@ namespace UnitTest
         //M.Emit m_3 = MakeM("{[1/2 1/2;1/2 1/2],[1/2 1/2;1/2 -1/2+i],[1/2 1/2;1/2 1/2]}");
 
 
-        public void Run()
+        public void run()
         {
             QWhile(m(q1),
                 () =>

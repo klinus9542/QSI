@@ -127,10 +127,10 @@ namespace UnitTest
             MeasureMatrixH mMH = new MeasureMatrixH(measureMatrixComput(binSpaceLength));
 
 #if DEBUG
-            Console.WriteLine("The loop time is {0}", r - 1);
+            Console.WriteLine("The loop time is {0}.", r - 1);
         //   Console.WriteLine("TempTensorProduct is {0}", tempTensorProduct.Value);
 #endif
-            Console.WriteLine("Target is {0}, the final result number is {1}", ansIndex, tempTensorProduct.MeasuHResultIndex(mMH)); ;
+            Console.WriteLine("Target is {0}, the final result number is {1}.\n", ansIndex, tempTensorProduct.MeasuHResultIndex(mMH)); ;
 
 
         }

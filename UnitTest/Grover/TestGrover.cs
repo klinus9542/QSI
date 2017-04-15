@@ -17,6 +17,9 @@ namespace UnitTest
     {
         static public void TestMethod()
         {
+            Console.WriteLine("\nThe default oracle position is '3'.");
+            Console.WriteLine("Grover Search algorithm begins:");
+
             Ket q1 = new Ket(2, 0);
             Ket q2 = new Ket(2, 0);
             Ket q = new Ket(2, 0);
@@ -43,15 +46,15 @@ namespace UnitTest
             }
             MeasureMatrixH mMH = new MeasureMatrixH(measureMatrixComput());
 
-            Console.WriteLine("The result number is {0}", tempTensorProduct.MeasuHResultIndex(mMH)); ;
+           
+            Console.WriteLine("The result number is {0}.\n", tempTensorProduct.MeasuHResultIndex(mMH)); ;
 
 
         }
 
         static public void oracle(ref Ket oracleMatrixStorage, ref Ket q)
         {
-            //  Ket workOracleMatrixStorage=new Ket((Matrix)oracleMatrixStorage.Value.KroneckerProduct(q.Value));
-
+   
             //|11> is the answer
             Ket qbit1 = new Ket(2, 1);
             Ket qbit2 = new Ket(2, 1);

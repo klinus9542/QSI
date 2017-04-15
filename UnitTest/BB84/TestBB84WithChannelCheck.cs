@@ -1,5 +1,6 @@
 ﻿using MathNet.Numerics.LinearAlgebra.Complex;
 using MathNet.Numerics.Random;
+using QuantumToolkit;
 using QuantumToolkit.Type;
 using System;
 using System.Collections;
@@ -129,10 +130,10 @@ namespace UnitTest
 
             ////--------------Quantum Channel begins, ignoring EVE ----------
 
-            var densityopEncArray = new PureDensityOperator[arrayLength];
+            var densityopEncArray = new DensityOperator[arrayLength];
             for (var i = 0; i < arrayLength; i++)
             {
-                densityopEncArray[i] = new PureDensityOperator(ketEncArray[i], new Bra(ketEncArray[i]));
+                densityopEncArray[i] = new DensityOperator(ketEncArray[i], new Bra(ketEncArray[i]));
             }
             QuantumChannelProcess(densityopEncArray);
 
@@ -309,8 +310,8 @@ namespace UnitTest
 
             //Sampling end
 
-            Console.WriteLine($"zeroOneMeasure:\n{zeroOneMeasure.Value[0]}{zeroOneMeasure.Value[1]}");
-            Console.WriteLine($"plusminusMeasure:\n{plusminusMeasure.Value[0]}{plusminusMeasure.Value[1]}");
+            Console.WriteLine($"zeroOneMeasure:\n{zeroOneMeasure.Value[0]}{zeroOneMeasure.Value[1].ToComplexString()}");
+            Console.WriteLine($"plusminusMeasure:\n{plusminusMeasure.Value[0]}{plusminusMeasure.Value[1].ToComplexString()}");
             Console.Write("rawKeyArray\t");
             foreach (var b in rawKeyArray)
             {
@@ -326,8 +327,8 @@ namespace UnitTest
 
             /*for (var i = 0; i < densityopEncArray.Length; i++)
             {
-                Console.Write($"densityopEncArray{i}");
-                Console.Write($"{densityopEncArray[i].Value}");
+                Console.Write(densityopEncArray{i});
+                Console.Write(densityopEncArray[i].Value.ToComplexString());
             } */
             Console.WriteLine();
 
@@ -399,7 +400,7 @@ namespace UnitTest
         }
 
 
-        static void QuantumChannelProcess(PureDensityOperator[] densityopEncArray)
+        static void QuantumChannelProcess(DensityOperator[] densityopEncArray)
         {
 
             // E0,E1 for Kraus Opearator,Bit Flip channel

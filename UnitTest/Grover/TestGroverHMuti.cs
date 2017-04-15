@@ -88,10 +88,11 @@ namespace UnitTest
             if (ansIndex >= binSpaceLength || spaceLength > 10)
             {
                 Console.WriteLine("You target is more than search space or space is more than 2^10");
-                while (true)
-                {
-                    Thread.Sleep(Timeout.Infinite);
-                }
+                  return;
+                //while (true)
+                //{
+                //    Thread.Sleep(Timeout.Infinite);
+                //}
 
             } 
              ansIndexColList.Add(ansIndex);

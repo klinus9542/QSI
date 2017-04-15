@@ -23,7 +23,7 @@ namespace UnitTest
 
             for (var i = 0; i < loopCount; i++)
             {
-                var rou = new PureDensityOperator((Matrix) Matrix.Build.DenseOfArray(array2));
+                var rou = new DensityOperator((Matrix) Matrix.Build.DenseOfArray(array2));
                 count = 0;
                 rou.UnitaryTransH(HGate.Value);
 
@@ -78,7 +78,7 @@ namespace UnitTest
             var countNumber = new SortedDictionary<int, int>();
             for (var i = 0; i < loopCount; i++)
             {
-                var rou = new PureDensityOperator((Matrix)Matrix.Build.DenseOfArray(array2));
+                var rou = new DensityOperator((Matrix)Matrix.Build.DenseOfArray(array2));
                 count = 0;
                 SuperMatrixTrans(rou, superE);
 

@@ -1,4 +1,5 @@
 ﻿using MathNet.Numerics.LinearAlgebra.Complex;
+using QuantumToolkit;
 using QuantumToolkit.Type;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace UnitTest
         static public void TestMethod()
         {
             Console.WriteLine("QBit value");
-            Console.WriteLine($"{new QBit(false).Value}");
+            Console.WriteLine(new QBit(false).Value.ToComplexString());
             var matrixArray = new Matrix[2];
             Complex[,] array0 = { {0.5,0.5},
                                   {0.5,0.5} };
@@ -23,9 +24,9 @@ namespace UnitTest
             matrixArray[1] = (Matrix)Matrix.Build.DenseOfArray(array1);
             var measureMatrix2 = new MeasureMatrix2(matrixArray);
             Console.WriteLine("Measurement matrix 0");
-            Console.WriteLine($"{measureMatrix2.Value[0]}");
+            Console.WriteLine(measureMatrix2.Value[0].ToComplexString());
             Console.WriteLine("Measurement matrix 1");
-            Console.WriteLine($"{measureMatrix2.Value[1]}");
+            Console.WriteLine(measureMatrix2.Value[1].ToComplexString());
             int count;
             var countNumber = new SortedDictionary<int, int>();
 

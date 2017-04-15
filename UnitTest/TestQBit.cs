@@ -1,4 +1,5 @@
 ﻿using MathNet.Numerics.LinearAlgebra.Complex;
+using QuantumToolkit;
 using QuantumToolkit.Type;
 using System;
 using System.Collections.Generic;
@@ -15,9 +16,9 @@ namespace UnitTest
             Complex[,] array1 = { {new Complex(0,0),new Complex(1,0)},
                                   {new Complex(1,0),new Complex(0,0)} };
             var matrix1 = (Matrix)Matrix.Build.DenseOfArray(array1);
-            Console.WriteLine(qBit1.Value);
+            Console.WriteLine(qBit1.Value.ToComplexString());
             qBit1.UnitaryTrans2(matrix1);
-            Console.WriteLine(qBit1.Value);
+            Console.WriteLine(qBit1.Value.ToComplexString());
         }
 
         static public void TestMethod2()

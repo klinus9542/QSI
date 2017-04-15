@@ -8,7 +8,7 @@ import skc.utils
 import math
 
 #
-import scipy.io as sio
+import scipy.io
 #
 
 H2 = get_hermitian_basis(d=2)
@@ -27,7 +27,7 @@ print "Identity Name: " + H2.identity.name
 #matrix_U = matrixify([[0, -1j], [1j, 0]]) #test case 2, Y gate
 
 #
-matrix_U = sio.mmread(sys.argv[1])
+matrix_U = scipy.io.loadmat(sys.argv[1])['matrix']
 #
 op_U = Operator(name="U", matrix=matrix_U)
 

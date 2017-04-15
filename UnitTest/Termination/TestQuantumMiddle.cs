@@ -17,7 +17,7 @@ namespace UnitTest
 
         M.Emit m = MakeM("{[1 0;0 0],[0 0;0 1]}");
 
-        public void Run()
+        public void run()
         {
             QWhile(m(q1), //Qwhile 1, almost termination 
                 () =>
@@ -44,7 +44,7 @@ namespace UnitTest
 
         M.Emit m = MakeM("{[1 0;0 0],[0 0;0 1]}");
 
-        public void Run()
+        public void run()
         {
             QWhile(m(q1), //Qwhile 1, non-termination 
                 () =>
@@ -71,7 +71,7 @@ namespace UnitTest
 
         M.Emit m = MakeM("{[1 0;0 0],[0 0;0 1]}");
 
-        public void Run()
+        public void run()
         {
             QWhile(m(q1), //Qwhile 1, non-termination 
                 () =>
@@ -98,7 +98,7 @@ namespace UnitTest
 
         M.Emit m = MakeM("{[1 0;0 0],[0 0;0 1]}");
 
-        public void Run()
+        public void run()
         {
             QWhile(m(q1), //Qwhile 1, termination
                 () =>
@@ -139,7 +139,7 @@ namespace UnitTest
 
         M.Emit m = MakeM("{[1 0;0 0],[0 0;0 1]}");
 
-        public void Run()
+        public void run()
         {
             QWhile(m(q1),
                 () =>
@@ -170,7 +170,7 @@ namespace UnitTest
 
         M.Emit m = MakeM("{[1 0;0 0],[0 0;0 1]}");
 
-        public void Run()
+        public void run()
         {
             QWhile(m(q1),
                 () =>
@@ -201,7 +201,7 @@ namespace UnitTest
 
         M.Emit m = MakeM("{[1 0;0 0],[0 0;0 1]}");
 
-        public void Run()
+        public void run()
         {
             QWhile(m(q1),
                 () =>
@@ -233,7 +233,7 @@ namespace UnitTest
 
         M.Emit m = MakeM("{[1 0;0 0],[0 0;0 1]}");
 
-        public void Run()
+        public void run()
         {
             QWhile(m(q1),
                 () =>
@@ -272,7 +272,7 @@ namespace UnitTest
 
         M.Emit m = MakeM("{[1 0;0 0],[0 0;0 1]}");
 
-        public void Run()
+        public void run()
         {
             QWhile(m(q1),
                 () =>
@@ -300,7 +300,7 @@ namespace UnitTest
         Quantum q1 = new Quantum(2);
         E.Emit e_1 = MakeE("{[1/sqrt(2) 0;0 1/sqrt(2)],[0 1/sqrt(2);1/sqrt(2) 0 ]}"); //depolarizing damping damping super-operator.  p=1
         M.Emit m = MakeM("{[1 0;0 0],[0 0;0 1]}");
-        public void Run()
+        public void run()
         {
             QIf(m(q1),
                 () =>
@@ -345,7 +345,7 @@ namespace UnitTest
 
         M.Emit m = MakeM("{[1 0;0 0],[0 0;0 1]}");
 
-        public void Run()
+        public void run()
         {
             e_1(q1);
 
