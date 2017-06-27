@@ -13,7 +13,7 @@ namespace UnitTest
             var inputFile = Path.Combine(exeDir, @"..\..\Termination\TestQuantumMiddle.cs");
             var generator = new Generator(File.ReadAllText(inputFile));
             generator.Parse("TestQuantumMid11");
-            generator.MatrixRepresentation(false);
+            generator.MatRepANDAnalysis(false);
             //Console.WriteLine(generator.OperatorGenerator);
 
             //var exeDir = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);

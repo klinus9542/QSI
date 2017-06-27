@@ -25,7 +25,7 @@ namespace UnitTest
 
                         QAsm.WriteQAsmText(false);
 
-                        generator.MatrixRepresentation(false);
+                        generator.MatRepANDAnalysis(false);
                         //Console.WriteLine(generator.OperatorGenerator);
 
                         var test = QEnv.CreateQEnv<TestQuantumConv0>();
@@ -63,9 +63,10 @@ namespace UnitTest
                         generator.Parse("TestQuantumConv1");
                         QAsm.Generate("TestQuantumConv1", 0, Matlab.PreSKMethod.OrginalQSD, generator.OperatorGenerator.OperatorTree);
                         QAsm.WriteQAsmText(false);
-                        generator.MatrixRepresentation(false);
+                        generator.MatRepANDAnalysis(false);
                         //Console.WriteLine(generator.OperatorGenerator);
 
+                        
                         var test = QEnv.CreateQEnv<TestQuantumConv1>();
                         test.DisplayRegisterSet = false;
                         var countNumber = new SortedDictionary<int, int>();
@@ -103,7 +104,7 @@ namespace UnitTest
                         QAsm.WriteQAsmText(true);
                         //QAsm.WriteDgmlFull();
                         //QAsm.WriteDgmlSimple();
-                        generator.MatrixRepresentation(false);
+                        generator.MatRepANDAnalysis(false);
                         //Console.WriteLine(generator.OperatorGenerator);
 
                         var test = QEnv.CreateQEnv<TestQuantumConv0>();
@@ -125,7 +126,7 @@ namespace UnitTest
                         QAsm.WriteQAsmText(true);
                         //QAsm.WriteDgmlFull();
                         //QAsm.WriteDgmlSimple();
-                        generator.MatrixRepresentation(false);
+                        generator.MatRepANDAnalysis(false);
                         //Console.WriteLine(generator.OperatorGenerator);
 
                         var test = QEnv.CreateQEnv<TestQuantumConv6>();
@@ -172,7 +173,7 @@ namespace UnitTest
                         QAsm.WriteQAsmText(true);
                         //QAsm.WriteDgmlFull();
                         //QAsm.WriteDgmlSimple();
-                        generator.MatrixRepresentation(false);
+                        generator.MatRepANDAnalysis(false);
                         //Console.WriteLine(generator.OperatorGenerator);
 
                         var test = QEnv.CreateQEnv<TestQuantumConv5>();
@@ -195,7 +196,7 @@ namespace UnitTest
                         QAsm.WriteQAsmText(true);
                         //QAsm.WriteDgmlFull();
                         //QAsm.WriteDgmlSimple();
-                        generator.MatrixRepresentation(false);
+                        generator.MatRepANDAnalysis(false);
                         //Console.WriteLine(generator.OperatorGenerator);
 
                         var test = QEnv.CreateQEnv<TestQuantumConv1>();
@@ -291,7 +292,7 @@ namespace UnitTest
                         var inputFile = Path.Combine(exeDir, @"..\..\SecCode\TestQuantMulti.cs");
                         var generator = new Generator(File.ReadAllText(inputFile));
                         generator.Parse("TestQuantMulti3");
-                        generator.MatrixRepresentation(false);
+                        generator.MatRepANDAnalysis(false);
                         //Console.WriteLine(generator.OperatorGenerator);
 
                         QAsm.Generate("TestQuantMulti3", 0, Matlab.PreSKMethod.OrginalQSD, generator.OperatorGenerator.OperatorTree);
@@ -300,17 +301,27 @@ namespace UnitTest
                         var test = QEnv.CreateQEnv<TestQuantMulti3>();
                         test.DisplayRegisterSet = false;
                         //int NumberOfZero = 0;
-                        int NumberOfOne = 1;
-                        for (int i = 1; i < 1000; i++)
+                        int NumberOfOne = 0;
+
+
+                        test.Init();
+
+                        Console.WriteLine($"The state before teleportation is\n {test.Alice.DensityOperator.Value.ToComplexString()}\n");
+                        Console.WriteLine("After that, we repeat the protocol about 1000 times to teleport the states.\n ");
+                        Console.WriteLine("Finally, in every experiment, we perform a computational basis measurement and denote the time we get 'ONE'\n");
+
+                        for (int i = 0; i < 1000; i++)
                         {
+
                             test.Run();
 
                             if (test.r3.Value == 1)
                                 NumberOfOne++;
-                            //Console.WriteLine(test.r3.Value);
+                            test.InitSuperRegister();
+
                         }
-                        // Console.WriteLine("Num of Zero is {0}", NumberOfZero);
-                        Console.WriteLine("Num of One is {0}", NumberOfOne);
+                        test.InitSuperRegister();
+                        Console.WriteLine("Count number of ONE is {0}\n", NumberOfOne);
                         break;
                     }
             }

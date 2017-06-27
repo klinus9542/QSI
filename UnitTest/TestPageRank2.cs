@@ -168,7 +168,7 @@ namespace UnitTest
             {
                 m = 5;
             }
-            Console.WriteLine("The Step of quantum evoloution is {0}.\n ", m);
+            Console.WriteLine("The Step of quantum evolution is {0}.\n ", m);
 
 
 
@@ -238,7 +238,7 @@ namespace UnitTest
             {
                 Console.WriteLine("{0} - {1}", rank.Page + 1, rank.PageRank);
             }
-            Console.ReadKey();
+            //Console.ReadKey();
         }
     }
 }

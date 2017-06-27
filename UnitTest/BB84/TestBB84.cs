@@ -280,7 +280,7 @@ namespace UnitTest
                 Console.WriteLine("Must input integer, use default(10)");
                 arrayLength = 10;
             }
-            Console.Write("Input Client Count:");
+            Console.Write("Input Clients Number:");
             var clientCountStr = Console.ReadLine();
             int clientCount;
             if (!int.TryParse(clientCountStr, out clientCount))
@@ -294,7 +294,8 @@ namespace UnitTest
             {
                 new Bob(alice);
             }
-            Console.ReadKey(true);
+            //Console.ReadKey(true);
+            System.Threading.Thread.Sleep(2000);
             alice.Release();
         }
 

@@ -309,8 +309,10 @@ namespace UnitTest
             {
                 new Bob(alice);
             }
-            Console.ReadKey(true);
+            //Console.ReadKey(true);
+           // System.Threading.Thread.Sleep(4000);
             alice.Release();
+            System.Threading.Thread.Sleep(4000);
         }
 
         static void QuantumChannelProcess(DensityOperator[] densityopEncArray)
@@ -319,11 +321,11 @@ namespace UnitTest
             // E0,E1 for Kraus Opearator,Bit Flip channel
             // E0= (|0><0| + |1><1|)/sqrt(2),E1=  (|0><1|+|1><0|)/sqrt(2)
             var matrixArrayE = new Matrix[2];
-            Complex[,] arrayTemp0 = { {1/Sqrt(2),0},
-                                  {0,1/Sqrt(2)} };
+            Complex[,] arrayTemp0 = { {Sqrt(0.9),0},
+                                  {0,Sqrt(0.9)} };
             matrixArrayE[0] = (Matrix)Matrix.Build.DenseOfArray(arrayTemp0);
-            Complex[,] arrayTemp1 = { {0,1/Sqrt(2)},
-                                  {1/Sqrt(2),0} };
+            Complex[,] arrayTemp1 = { {0,Sqrt(0.1)},
+                                  {Sqrt(0.1),0} };
             matrixArrayE[1] = (Matrix)Matrix.Build.DenseOfArray(arrayTemp1);
             var superE = new SuperOperator(matrixArrayE);
             //-----------------------------Bit Flip channel Ends-----------------
