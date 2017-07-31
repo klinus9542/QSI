@@ -278,7 +278,7 @@ namespace UnitTest
 
                             if (test.r3.Value == 1)
                                 NumberOfOne++;
-                            test.InitSuperRegister();
+                           // test.InitSuperRegister();
 
                         }
                         test.InitSuperRegister();

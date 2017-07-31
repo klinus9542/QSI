@@ -11,31 +11,40 @@ namespace QSI
     {
         static void Main(string[] args)
         {
-            var exeDir = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
-            var inputFile = Path.Combine(exeDir, @"..\..\QSI_Code\Test.cs");
-            var generator = new Generator(File.ReadAllText(inputFile));
-            generator.Parse("Test");
-            generator.MatRepANDAnalysis(false);
-            //Console.WriteLine(generator.OperatorGenerator);
 
+            //------------------Tell the program the entry to be analysed----------
+            var exeDir = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);//exe parth
+            var inputFile = Path.Combine(exeDir, @"..\..\QSI_Code\Test.cs");//The target file
+            var generator = new Generator(File.ReadAllText(inputFile));//Generate the exAST
+
+            //-----------------Termination Analysis-----------------
+            generator.Parse("Test");//Construct
+            generator.MatRepANDAnalysis(false);//Termination analysis
+            //Console.WriteLine(generator.OperatorGenerator);// Process print
+
+            //----------------Generate f-QASM-----------------------
             QAsm.Generate("Test", 0, Matlab.PreSKMethod.OrginalQSD, generator.OperatorGenerator.OperatorTree);
-            QAsm.WriteQAsmText(true);
+            QAsm.WriteQAsmText(true);//write a file
 
+            //----------------Core for executing
             var test = QEnv.CreateQEnv<QSI_Code.Test>();
-            test.DisplayRegisterSet = false;
+            test.DisplayRegisterSet = false; //Show the Quantum State?
            
 
 
-            test.Init();
-            test.Run();
-
-
-            //    test.InitSuperRegister();
-
-        
-            test.InitSuperRegister();
-            Console.WriteLine("Count number of ONE is {0}\n", test.r1.Value);
-            Console.ReadKey(true);
+            test.Init(); //Remember Init() before executing the program
+            
+            while (true)
+            {
+                test.Run();//Clear and Run 
+                Console.WriteLine("The value of r1 is {0}", test.r1.Value);
+                Console.WriteLine("The value of r2 is {0}", test.r2.Value);
+                Console.WriteLine("The value of r3 is {0}", test.r3.Value);
+                Console.WriteLine("The value of r4 is {0}", test.r4.Value);
+                Console.WriteLine("\r\n");
+               
+                Console.ReadKey(true);
+            }
         }
     }
 }
