@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{B05C57F1-1553-4008-9184-5BF825BAA31B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QSI", "QSI\QSI.csproj", "{944D1391-9E31-4381-BAE2-522F6D7E47E7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B05C57F1-1553-4008-9184-5BF825BAA31B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B05C57F1-1553-4008-9184-5BF825BAA31B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B05C57F1-1553-4008-9184-5BF825BAA31B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B05C57F1-1553-4008-9184-5BF825BAA31B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{944D1391-9E31-4381-BAE2-522F6D7E47E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{944D1391-9E31-4381-BAE2-522F6D7E47E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{944D1391-9E31-4381-BAE2-522F6D7E47E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{944D1391-9E31-4381-BAE2-522F6D7E47E7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
