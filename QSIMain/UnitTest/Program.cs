@@ -24,7 +24,7 @@ namespace UnitTest
                 Console.WriteLine("Welcome to QSI: Quantum Programming Environment!");
 
                 Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 3);
-                Console.WriteLine("Version: Build 07.30.17 ( .net Framework: 4.6.1 )");
+                Console.WriteLine("Version: Build 08.18.17 ( .net Framework: 4.6.2 )");
 
                 Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 4);
                 Console.WriteLine("Stage: Alpha\n");
