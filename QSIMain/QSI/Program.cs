@@ -18,12 +18,12 @@ namespace QSI
             generator.MatRepANDAnalysis(false);
             //Console.WriteLine(generator.OperatorGenerator);
 
-            QAsm.Generate("Test", 0, Matlab.PreSKMethod.OrginalQSD, generator.OperatorGenerator.OperatorTree);
+            QAsm.Generate("Test", 3, 1, Matlab.PreSKMethod.OrginalQSD, generator.OperatorGenerator.OperatorTree);
             QAsm.WriteQAsmText(true);
 
             var test = QEnv.CreateQEnv<QSI_Code.Test>();
             test.DisplayRegisterSet = false;
-           
+
 
 
             test.Init();
@@ -32,7 +32,7 @@ namespace QSI
 
             //    test.InitSuperRegister();
 
-        
+
             test.InitSuperRegister();
             Console.WriteLine("Count number of ONE is {0}\n", test.r1.Value);
             Console.ReadKey(true);
