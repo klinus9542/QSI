@@ -63,7 +63,7 @@ namespace UnitTest
                 if (!int.TryParse(funcNumStr, out int funcNum))
                 {
                     Console.WriteLine("Thank you for using UTS:QSI, Application exit!");
-                    System.Threading.Thread.Sleep(2000);
+                    System.Threading.Thread.Sleep(1000);
                     Environment.Exit(0);
                 }
 

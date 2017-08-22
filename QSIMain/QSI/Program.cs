@@ -18,7 +18,7 @@ namespace QSI
             generator.MatRepANDAnalysis(false);
             //Console.WriteLine(generator.OperatorGenerator);
 
-            QAsm.Generate("Test", 3, 1, Matlab.PreSKMethod.OrginalQSD, generator.OperatorGenerator.OperatorTree);
+            QAsm.Generate("Test", 0, 1, Matlab.PreSKMethod.OrginalQSD, generator.OperatorGenerator.OperatorTree);
             QAsm.WriteQAsmText(true);
 
             var test = QEnv.CreateQEnv<QSI_Code.Test>();
