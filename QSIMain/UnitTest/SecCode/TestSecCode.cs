@@ -214,7 +214,7 @@ namespace UnitTest
                         var exeDir = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
                         var inputFile = Path.Combine(exeDir, @"..\..\SecCode\TestQuantMulti.cs");
                         var generator = new Generator(File.ReadAllText(inputFile));
-                        Console.WriteLine("The experiment begins.....");
+                        Console.WriteLine("\nThe experiment will generate |0> and |+> states and perform a CNOT gate on these states. Bell state should be generated. Now begins.....");
                         generator.Parse("TestQuantMulti0");
                      
                         //generator.MatrixRepresentation(false);

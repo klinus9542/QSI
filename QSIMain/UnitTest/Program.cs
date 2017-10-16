@@ -24,10 +24,10 @@ namespace UnitTest
                 Console.WriteLine("Welcome to QSI Quantum Programming Environment!");
 
                 Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 3);
-                Console.WriteLine("Version: Build 08.18.17 ( .net Framework: 4.6.2 )");
+                Console.WriteLine("Version: 0.1 Build 10.16.17 ( .net Framework: 4.6.2 )");
 
                 Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 4);
-                Console.WriteLine("Stage: Alpha\n");
+                Console.WriteLine("Stage: Beta\n");
 
 
                 for (int j = 1; j <= Console.WindowWidth; j++)
@@ -63,7 +63,7 @@ namespace UnitTest
                 if (!int.TryParse(funcNumStr, out int funcNum))
                 {
                     Console.WriteLine("Thank you for using UTS:QSI, Application exit!");
-                    System.Threading.Thread.Sleep(1000);
+                    System.Threading.Thread.Sleep(2000);
                     Environment.Exit(0);
                 }
 
