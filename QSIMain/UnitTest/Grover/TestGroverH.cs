@@ -68,7 +68,7 @@ namespace UnitTest
 
             //Figure out the oracle answer
             //In this stage, only one correct answer
-            Console.WriteLine("Intialling the oracle......,where is the correct answers(From 0 to 2^n-1)?");
+            Console.WriteLine("Intialling the oracle......,where is the correct answer(From 0 to 2^n-1)?");
             var ansIndexStr = Console.ReadLine();
 
             if (!int.TryParse(ansIndexStr, out ansIndex))

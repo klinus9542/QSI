@@ -1,5 +1,6 @@
 ﻿using MathNet.Numerics;
 using System;
+using System.Runtime.InteropServices;
 
 namespace UnitTest
 {
@@ -7,8 +8,9 @@ namespace UnitTest
     {
         static void Main(string[] args)
         {
-            Control.UseNativeMKL();//Control.UseManaged();
-            //Console.WriteLine(Control.LinearAlgebraProvider);
+            DisableCloseButton(Console.Title);
+
+            Control.UseNativeMKL();
 
             while (true)
             {
@@ -24,7 +26,7 @@ namespace UnitTest
                 Console.WriteLine("Welcome to QSI Quantum Programming Environment!");
 
                 Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 3);
-                Console.WriteLine("Version: 0.1 Build 10.16.17 ( .net Framework: 4.6.2 )");
+                Console.WriteLine("Version: 0.1 Build 10.26.17 ( .net Framework: 4.6.1 )");
 
                 Console.SetCursorPosition((Console.WindowWidth / 2) - 30, 4);
                 Console.WriteLine("Stage: Beta\n");
@@ -143,6 +145,19 @@ namespace UnitTest
 
                 Console.ReadKey(true);
             }
+        
+    }
+        [DllImport("User32.dll", EntryPoint = "FindWindow")]
+        static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+        [DllImport("user32.dll", EntryPoint = "GetSystemMenu")]
+        static extern IntPtr GetSystemMenu(IntPtr hWnd, IntPtr bRevert);
+        [DllImport("user32.dll", EntryPoint = "RemoveMenu")]
+        static extern IntPtr RemoveMenu(IntPtr hMenu, uint uPosition, uint uFlags);
+        public static void DisableCloseButton(string consoleName)
+        {
+            IntPtr windowHandle = FindWindow(null, consoleName);
+            IntPtr closeMenu = GetSystemMenu(windowHandle, IntPtr.Zero);
+            RemoveMenu(closeMenu, 0xF060, 0x0);
         }
     }
 }

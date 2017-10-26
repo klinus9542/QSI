@@ -20,8 +20,7 @@ namespace UnitTest
                         var inputFile = Path.Combine(exeDir, @"..\..\SecCode\TestQuantumConv.cs");
                         var generator = new Generator(File.ReadAllText(inputFile));
                         generator.Parse("TestQuantumConv0");
-                        //QAsm.Generate("TestQuantumConv0", 3,1, Matlab.PreSKMethod.OrginalQSD, generator.OperatorGenerator.OperatorTree);
-                        QAsm.Generate("TestQuantumConv0", 0,1, Matlab.PreSKMethod.OrginalQR, generator.OperatorGenerator.OperatorTree);
+                        QAsm.Generate("TestQuantumConv0", 0, 1, QuantumMath.PreSKMethod.OrginalQR, generator.OperatorGenerator.OperatorTree);
 
                         QAsm.WriteQAsmText(false);
 
@@ -61,12 +60,12 @@ namespace UnitTest
                         var inputFile = Path.Combine(exeDir, @"..\..\SecCode\TestQuantumConv.cs");
                         var generator = new Generator(File.ReadAllText(inputFile));
                         generator.Parse("TestQuantumConv1");
-                        QAsm.Generate("TestQuantumConv1", 0,1, Matlab.PreSKMethod.OrginalQSD, generator.OperatorGenerator.OperatorTree);
+                        QAsm.Generate("TestQuantumConv1", 0, 1, QuantumMath.PreSKMethod.OrginalQSD, generator.OperatorGenerator.OperatorTree);
                         QAsm.WriteQAsmText(false);
                         generator.MatRepANDAnalysis(false);
                         //Console.WriteLine(generator.OperatorGenerator);
 
-                        
+
                         var test = QEnv.CreateQEnv<TestQuantumConv1>();
                         test.DisplayRegisterSet = false;
                         var countNumber = new SortedDictionary<int, int>();
@@ -100,7 +99,7 @@ namespace UnitTest
                         var inputFile = Path.Combine(exeDir, @"..\..\SecCode\TestQuantumConv.cs");
                         var generator = new Generator(File.ReadAllText(inputFile));
                         generator.Parse("TestQuantumConv0");
-                        QAsm.Generate("TestQuantumConv0", 0,1, Matlab.PreSKMethod.OrginalQSD, generator.OperatorGenerator.OperatorTree);
+                        QAsm.Generate("TestQuantumConv0", 0, 1, QuantumMath.PreSKMethod.OrginalQSD, generator.OperatorGenerator.OperatorTree);
                         QAsm.WriteQAsmText(true);
                         //QAsm.WriteDgmlFull();
                         //QAsm.WriteDgmlSimple();
@@ -122,7 +121,7 @@ namespace UnitTest
                         var inputFile = Path.Combine(exeDir, @"..\..\SecCode\TestQuantumConv.cs");
                         var generator = new Generator(File.ReadAllText(inputFile));
                         generator.Parse("TestQuantumConv6");
-                        QAsm.Generate("TestQuantumConv6", 0,1, Matlab.PreSKMethod.OrginalQSD, generator.OperatorGenerator.OperatorTree);
+                        QAsm.Generate("TestQuantumConv6", 0, 1, QuantumMath.PreSKMethod.OrginalQSD, generator.OperatorGenerator.OperatorTree);
                         QAsm.WriteQAsmText(true);
                         //QAsm.WriteDgmlFull();
                         //QAsm.WriteDgmlSimple();
@@ -145,7 +144,7 @@ namespace UnitTest
                         var inputFile = Path.Combine(exeDir, @"..\..\SecCode\TestQuantumConv.cs");
                         var generator = new Generator(File.ReadAllText(inputFile));
                         generator.Parse("TestQuantumConv5");
-                        QAsm.Generate("TestQuantumConv5", 0,1, Matlab.PreSKMethod.OrginalQSD, generator.OperatorGenerator.OperatorTree);
+                        QAsm.Generate("TestQuantumConv5", 0, 1, QuantumMath.PreSKMethod.OrginalQSD, generator.OperatorGenerator.OperatorTree);
                         QAsm.WriteQAsmText(true);
                         //QAsm.WriteDgmlFull();
                         //QAsm.WriteDgmlSimple();
@@ -169,7 +168,7 @@ namespace UnitTest
                         var inputFile = Path.Combine(exeDir, @"..\..\SecCode\TestQuantumConv.cs");
                         var generator = new Generator(File.ReadAllText(inputFile));
                         generator.Parse("TestQuantumConv5");
-                        QAsm.Generate("TestQuantumConv5", 0,1, Matlab.PreSKMethod.OrginalQSD, generator.OperatorGenerator.OperatorTree);
+                        QAsm.Generate("TestQuantumConv5", 0, 1, QuantumMath.PreSKMethod.OrginalQSD, generator.OperatorGenerator.OperatorTree);
                         QAsm.WriteQAsmText(true);
                         //QAsm.WriteDgmlFull();
                         //QAsm.WriteDgmlSimple();
@@ -192,7 +191,7 @@ namespace UnitTest
                         var inputFile = Path.Combine(exeDir, @"..\..\SecCode\TestQuantumConv.cs");
                         var generator = new Generator(File.ReadAllText(inputFile));
                         generator.Parse("TestQuantumConv1");
-                        QAsm.Generate("TestQuantumConv1", 0, 1,Matlab.PreSKMethod.OrginalQSD, generator.OperatorGenerator.OperatorTree);
+                        QAsm.Generate("TestQuantumConv1", 0, 1, QuantumMath.PreSKMethod.OrginalQSD, generator.OperatorGenerator.OperatorTree);
                         QAsm.WriteQAsmText(true);
                         //QAsm.WriteDgmlFull();
                         //QAsm.WriteDgmlSimple();
@@ -216,7 +215,7 @@ namespace UnitTest
                         var generator = new Generator(File.ReadAllText(inputFile));
                         Console.WriteLine("\nThe experiment will generate |0> and |+> states and perform a CNOT gate on these states. Bell state should be generated. Now begins.....");
                         generator.Parse("TestQuantMulti0");
-                     
+
                         //generator.MatrixRepresentation(false);
                         //Console.WriteLine(generator.OperatorGenerator);
 
@@ -226,7 +225,7 @@ namespace UnitTest
                         int NumberOfOneOfr1 = 0;
                         int NumberOfZeroOfr2 = 0;
                         int NumberOfOneOfr2 = 0;
-                        
+
                         for (int i = 0; i < 1000; i++)
                         {
                             test.Run();
@@ -242,9 +241,9 @@ namespace UnitTest
                                 NumberOfOneOfr2++;
 
                         }
-                        Console.WriteLine("Reg 1 : 0's: {0},1's: {1}", NumberOfZeroOfr1, NumberOfOneOfr1);                        
+                        Console.WriteLine("Reg 1 : 0's: {0},1's: {1}", NumberOfZeroOfr1, NumberOfOneOfr1);
                         Console.WriteLine("Reg 2 : 0's: {0},1's: {1}", NumberOfZeroOfr2, NumberOfOneOfr2);
-                        
+
                         break;
                     }
                 case 7:
@@ -256,7 +255,7 @@ namespace UnitTest
                         Console.WriteLine("Quantum Teleportation begins...The experiment would repeat 1000 times.");
 
                         generator.Parse("TestQuantMulti1");
-                        QAsm.Generate("TestQuantMulti1", 0,1, Matlab.PreSKMethod.OrginalQR, generator.OperatorGenerator.OperatorTree);
+                        QAsm.Generate("TestQuantMulti1", 0, 1, QuantumMath.PreSKMethod.OrginalQR, generator.OperatorGenerator.OperatorTree);
                         QAsm.WriteQAsmText(true);
 
                         var test = QEnv.CreateQEnv<TestQuantMulti1>();
@@ -295,7 +294,7 @@ namespace UnitTest
                         generator.MatRepANDAnalysis(false);
                         //Console.WriteLine(generator.OperatorGenerator);
 
-                        QAsm.Generate("TestQuantMulti3", 0,1, Matlab.PreSKMethod.OrginalQSD, generator.OperatorGenerator.OperatorTree);
+                        QAsm.Generate("TestQuantMulti3", 0, 1, QuantumMath.PreSKMethod.OrginalQSD, generator.OperatorGenerator.OperatorTree);
                         QAsm.WriteQAsmText(true);
 
                         var test = QEnv.CreateQEnv<TestQuantMulti3>();
